@@ -1,0 +1,333 @@
+You are given a very large integer (more than 1000 digits) stored in the form of a Linked List. You have to implement increment operation on the integer.
+
+For example, the integer "123" is stored as "1->2->3". For that particular input, the output should be a linked list containing "1->2->4".
+
+Note : You have to provide an ITERATIVE solution. Recursive ones are not accepted.
+
+Code for taking input is given in the editor, so don't bother about the input. Your task is to edit the increment function. You can use define new functions but refrain from editing the other parts of the code. You are supposed to modify the head node i.e., head node should contain the incremented value.
+
+#include <iostream>
+#include <stdio.h>
+#include <cstdlib>
+#include <limits.h>
+
+using namespace std;
+
+struct Node {
+	
+	int data;
+	Node *next;
+	
+	Node(int _data){
+		data = _data;
+		next = NULL;
+	}
+	
+};
+
+/* helper functions */
+
+Node *insert(Node *head, int data){
+	
+	if(head == NULL){
+		return new Node(data);
+	}
+	
+	head->next = insert(head->next, data);
+	return head;
+	
+} 
+
+void print(Node *head){
+	
+	while(head){
+		cout << head->data <<" ";
+		head = head->next;
+	}
+	
+	cout << endl;
+	
+}
+
+/* helper functions */
+
+
+// You have to edit this function and store the output in head
+
+void increment(Node* &head)
+{int x=0;
+	Node *a;
+	a=head;
+	Node *b;
+	
+	while(a->next!=NULL)
+	{
+		a=a->next;
+		
+	}
+Node* last;
+  last=a;
+
+	b=a;
+
+while(b!=head )
+{a=head,b=head;
+	while(a!=last)
+	
+	{
+		a=a->next;
+	}
+	
+	while(b->next!=a)
+	{
+		b=b->next;
+	}
+	last=b;
+	if(a->data!=9)
+		{
+			a->data=a->data+1;
+			break;
+		}
+		else
+		{
+			
+			a->data=0;
+				if(b->data==9 )
+			{
+				x=1;
+			}
+			else
+			{
+				
+					b->data=b->data+x;
+					x=0;
+			}
+			
+			
+			
+			}
+	
+		
+}
+
+
+}
+
+
+
+int main(){
+	
+	int t;
+	cin >> t;
+	
+	for(int _t = 1; _t <= t; ++_t){
+		
+		Node *head = NULL;
+		int _n;
+		cin >> _n;
+		
+		for(int i = 0; i < _n; ++i){
+			int data;
+			cin >> data;
+			head = insert(head, data);
+		}
+		
+		increment(head);
+		print(head);
+		
+		
+	}
+	
+}
+
+-----------------------------------------------------------------------
+Given two strings a and b, find whether they are anagrams or not.
+
+Input Format: First line contains an integer 't' denoting the number of test cases. Each test case contains a single line consisting of two strings 'a' and 'b'.
+
+Output: One line for each test case containing whether the two strings are anagrams or not. Print YES if they are anagrams, else NO.
+
+NOTE : Input consists of lowercase alphabets only.
+
+
+Sample Input (Plaintext Link)
+3
+abcde ecdab
+accba abbca
+adcsba scadba
+Sample Output (Plaintext Link)
+YES
+NO
+YES
+
+
+----------------------------------------------------------------------------------------
+Alice and Bob were playing a game. Alice gives Bob n integers and asks Bob to select k integers such that it’s unfairness is minimized If (x1,x2,x3,…..,xk) are k numbers selected from the list N, the unfairness is defined as Max(x1,x2,x3,x4…..xk)-min(x1,x2,x3…..xk).
+
+INPUT:
+
+The first line contains no of test cases t
+
+The first line of each test case contains an integer N
+
+Second line of each test case contains an integer k
+
+The next N linesof each test case contains all the integers given to Bob
+
+NOTE: The integers given to Bob may not be Unique.
+
+OUTPUT:
+
+The minimum Value of unfairness for each test case.
+    
+Sample Input:
+
+1
+
+7
+
+3
+
+10
+
+100
+
+300
+
+200
+
+1000
+
+20
+
+30
+
+Sample Output1:
+
+20
+
+Explanation:
+
+Max(10,20,30)-Min(10,20,30)=30-10=20
+
+Sample Input 2:
+
+1
+
+6
+
+3
+
+10
+
+20
+
+30
+
+100
+
+101
+
+102
+
+Sample Output2:
+
+2
+
+Explanation:
+
+max(100,101,102)-max(100,101,102)=102-100=2
+
+1
+7
+3
+10
+100
+300
+200
+1000
+20
+30
+Sample Output (Plaintext Link)
+20
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int x,k=0,j=0,len1,len2,count=0;
+    cin>>x;
+    for(int i=0;i<x;i++)
+    {
+    string s1,string s2;
+    cin>>s1;cin>>s2;
+    
+    while(s1[i]!=NULL)
+    j++;
+    
+    while(s2[i]!=NULL)
+    k++;
+    
+    len1=j-1;
+    len2=k-1;
+    j=0;k=0;
+    if(len1==len2)
+    
+   { 
+   	while(s2[j]!=NULL)
+    
+    {
+         while(s1[k]!=NULL && s1[k]!=s2[j])
+         
+         {
+         	k++;
+         }
+    if(k!=len1+1)
+    
+    {
+    	count++;
+    }
+    j++;
+    
+    }
+  }
+   
+ else
+   
+   {
+   	cout<<"NO"<<'\n';
+   count=0;}
+   
+   if(count ==len2)
+   cout<<"YES"<<'\n';
+    
+    
+    
+    return 0;
+}
+
+-------------------------------------------------------------------------------------------
+
+
+Amar bought a new video game "Guess Your Way Out!". The goal of the game is to find an exit from the maze that looks like a perfect binary tree of height h. The player is initially standing at the root of the tree and the exit from the tree is located at some leaf node.
+
+Let's index all the leaf nodes from the left to the right from 1 to 2^h. The exit is located at some node n where 1<=n<=2^h, the player doesn't know where the exit is so he has to guess his way out!
+
+Amar follows simple algorithm to choose the path. Let's consider infinite command string "LRLRLRLRL..." (consisting of alternating characters 'L' and 'R'). Amar sequentially executes the characters of the string using following rules:
+
+Character 'L' means "go to the left child of the current node"; Character 'R' means "go to the right child of the current node"; If the destination node is already visited, Amr skips current command, otherwise he moves to the destination node; If Amar skipped two consecutive commands, he goes back to the parent of the current node before executing next command; If he reached a leaf node that is not the exit, he returns to the parent of the current node; If he reaches an exit, the game is finished. Now Amar wonders, if he follows this algorithm, how many nodes he is going to visit before reaching the exit?
+
+Input
+
+The first line consists of an integer t denoting the number of test cases. Each of the next 't' lines consists of two integers h,n (1<=h<=50, 1<=n<=2^h).
+
+Output
+
+Output a single integer representing the number of nodes (excluding the exit node) Amar is going to visit before reaching the exit by following this algorithm.
+
+Sample Input (Plaintext Link)
+1
+1 2
+Sample Output (Plaintext Link)
+2
